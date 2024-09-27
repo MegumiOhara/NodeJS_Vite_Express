@@ -6,11 +6,12 @@ import './App.css'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [array, setArray] = useState([]);
 
   const fetchApi = async () => {
     const response = await axios.get("http://localhost:8080/api");
-    console.log(response);
+    setArray(response.data.coffee);
   };
 
   useEffect(() => {
@@ -27,13 +28,17 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>NodeJS + Express + Coffee Type List</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+         {array.map((coffee,index) =>
+          <ul key = {index}>
+            <li>{coffee}</li>
+          </ul>
+        )}
         </p>
       </div>
       <p className="read-the-docs">
